@@ -19,7 +19,7 @@ La première version couvre cinq systèmes et leurs organes principaux :
 - cardiovasculaire : cœur ;
 - respiratoire : poumons et trachée ;
 - nerveux : cerveau ;
-- digestif : foie, estomac, intestin grêle et côlon ;
+- digestif : foie, estomac, pancréas, intestin grêle et côlon ;
 - urinaire : reins et vessie.
 
 Chaque organe possède entre 8 et 24 sous-structures sélectionnables selon sa complexité. Le cœur sert de référence de profondeur avec au minimum : aorte, artère pulmonaire, veines caves, veines pulmonaires, oreillettes, ventricules, septum, valves, cordages tendineux, muscles papillaires, myocarde, péricarde, artères coronaires et nœuds électriques.
@@ -117,4 +117,3 @@ Le produit est accepté lorsque :
 ## 11. Hors périmètre initial
 
 Les modèles 3D volumétriques certifiés, la réalité augmentée, le diagnostic médical, le compte utilisateur, l’enregistrement cloud et la couverture exhaustive de tous les tissus microscopiques ne font pas partie de cette version. L’architecture doit néanmoins permettre d’ajouter ultérieurement d’autres organes et systèmes sans réécrire l’explorateur.
-
