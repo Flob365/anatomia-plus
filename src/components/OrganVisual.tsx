@@ -172,7 +172,11 @@ export function OrganVisual({ organ, mode, selectedId, onSelect }: { organ: Orga
       <mask id={`${organ.id}-heart-mask`}><rect width="510" height="620" fill={`url(#${organ.id}-asset-fade)`}/></mask>
     </defs>
     <g className="organ-illustration" filter={`url(#${organ.id}-shadow)`} pointerEvents="none">
-      {organ.id === 'heart' ? <image href={heartCutaway} x="22" y="-2" width="466" height="620" preserveAspectRatio="xMidYMid meet" mask={`url(#${organ.id}-heart-mask)`}/> : <>
+      {organ.id === 'heart' ? <>
+        <path d={path} fill={`url(#${tissueId})`} stroke={`url(#${organ.id}-rim)`} strokeWidth="4"/>
+        <path d={path} fill={`url(#${textureId})`} opacity=".42"/>
+        <image href={heartCutaway} x="22" y="-2" width="466" height="620" preserveAspectRatio="xMidYMid meet" mask={`url(#${organ.id}-heart-mask)`}/>
+      </> : <>
         <path d={path} fill={`url(#${tissueId})`} stroke={`url(#${organ.id}-rim)`} strokeWidth="4"/>
         <path d={path} fill={`url(#${textureId})`} opacity={mode === 'networks' ? .24 : .58}/>
         {(mode === 'section' || mode === 'isolate') && <path d={path} transform="translate(25 16) scale(.9)" fill={`url(#${deepId})`} stroke="#efb29e" strokeWidth="6" opacity=".84"/>}
