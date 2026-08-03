@@ -1,6 +1,6 @@
 # Anatomia+ Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Construire un atlas anatomique français pseudo‑3D, responsive et accessible couvrant onze organes et leurs sous-structures.
 
@@ -50,17 +50,17 @@
 **Interfaces:**
 - Produces: application Vite rendue dans `#root`; scripts `dev`, `build`, `test`, `test:run`.
 
-- [ ] **Step 1: Écrire le test de démarrage**
+- [x] **Step 1: Écrire le test de démarrage**
 
 ```tsx
 render(<App />)
 expect(screen.getByRole('heading', { name: /explorez le corps humain/i })).toBeInTheDocument()
 ```
 
-- [ ] **Step 2: Exécuter `pnpm test:run` et constater l’échec faute d’application.**
-- [ ] **Step 3: Créer le socle Vite, le HTML sémantique et le titre attendu.**
-- [ ] **Step 4: Installer les dépendances puis exécuter `pnpm test:run` et `pnpm build`.**
-- [ ] **Step 5: Commit `feat: bootstrap Anatomia application`.**
+- [x] **Step 2: Exécuter `pnpm test:run` et constater l’échec faute d’application.**
+- [x] **Step 3: Créer le socle Vite, le HTML sémantique et le titre attendu.**
+- [x] **Step 4: Installer les dépendances puis exécuter `pnpm test:run` et `pnpm build`.**
+- [x] **Step 5: Commit `feat: bootstrap Anatomia application`.**
 
 ### Task 2: Modèle anatomique et données complètes
 
@@ -70,7 +70,7 @@ expect(screen.getByRole('heading', { name: /explorez le corps humain/i })).toBeI
 **Interfaces:**
 - Produces: `AnatomySystem`, `Organ`, `AnatomyStructure`, `ViewMode`; `anatomySystems`; `findOrgan(id)`, `findStructure(organId, structureId)`, `searchAnatomy(query)`.
 
-- [ ] **Step 1: Tester que les données contiennent exactement onze organes, au moins huit structures par organe et au moins dix-huit pour le cœur.**
+- [x] **Step 1: Tester que les données contiennent exactement onze organes, au moins huit structures par organe et au moins dix-huit pour le cœur.**
 
 ```ts
 expect(anatomySystems.flatMap((system) => system.organs)).toHaveLength(11)
@@ -78,11 +78,11 @@ expect(organs.every((organ) => organ.structures.length >= 8)).toBe(true)
 expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 ```
 
-- [ ] **Step 2: Tester la recherche accent-insensible sur les noms français et latins.**
-- [ ] **Step 3: Exécuter le test et confirmer l’échec.**
-- [ ] **Step 4: Définir les types et renseigner les onze organes avec descriptions, fonctions, relations, mesures et notes cliniques.**
-- [ ] **Step 5: Implémenter les résolveurs et la normalisation de recherche.**
-- [ ] **Step 6: Exécuter `pnpm test:run` puis commit `feat: add structured anatomy content`.**
+- [x] **Step 2: Tester la recherche accent-insensible sur les noms français et latins.**
+- [x] **Step 3: Exécuter le test et confirmer l’échec.**
+- [x] **Step 4: Définir les types et renseigner les onze organes avec descriptions, fonctions, relations, mesures et notes cliniques.**
+- [x] **Step 5: Implémenter les résolveurs et la normalisation de recherche.**
+- [x] **Step 6: Exécuter `pnpm test:run` puis commit `feat: add structured anatomy content`.**
 
 ### Task 3: État d’exploration et URL partageable
 
@@ -92,12 +92,12 @@ expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 **Interfaces:**
 - Produces: `ExplorerSnapshot { systemId, organId, structureId, mode, rotation, zoom }`; `readExplorerState(search)`, `serializeExplorerState(state)`; hook avec `selectOrgan`, `selectStructure`, `setMode`, `rotate`, `zoomBy`, `resetView`.
 
-- [ ] **Step 1: Tester la lecture d’une URL valide et le repli vers `overview` en cas d’identifiant inconnu.**
-- [ ] **Step 2: Tester la sérialisation déterministe de l’état.**
-- [ ] **Step 3: Exécuter les tests et confirmer l’échec.**
-- [ ] **Step 4: Implémenter le codec URL bornant la rotation à ±45° et le zoom entre 0,8 et 2,2.**
-- [ ] **Step 5: Implémenter le hook et synchroniser l’historique avec `replaceState`.**
-- [ ] **Step 6: Exécuter les tests puis commit `feat: add shareable explorer state`.**
+- [x] **Step 1: Tester la lecture d’une URL valide et le repli vers `overview` en cas d’identifiant inconnu.**
+- [x] **Step 2: Tester la sérialisation déterministe de l’état.**
+- [x] **Step 3: Exécuter les tests et confirmer l’échec.**
+- [x] **Step 4: Implémenter le codec URL bornant la rotation à ±45° et le zoom entre 0,8 et 2,2.**
+- [x] **Step 5: Implémenter le hook et synchroniser l’historique avec `replaceState`.**
+- [x] **Step 6: Exécuter les tests puis commit `feat: add shareable explorer state`.**
 
 ### Task 4: Vue globale et scène anatomique pseudo‑3D
 
@@ -109,13 +109,13 @@ expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 - Consumes: `Organ`, `ExplorerSnapshot` et actions du hook.
 - Produces: scène avec `data-organ`, hotspots accessibles et contrôles réels de zoom/rotation/mode.
 
-- [ ] **Step 1: Tester qu’un clic sur un hotspot sélectionne la structure correspondante.**
-- [ ] **Step 2: Tester que les contrôles zoom, rotation, niveau et réinitialisation changent la scène.**
-- [ ] **Step 3: Exécuter le test et confirmer l’échec.**
-- [ ] **Step 4: Créer la silhouette globale avec zones d’organes et vues antérieure/postérieure.**
-- [ ] **Step 5: Créer les onze illustrations SVG en couches avec variantes externe, coupe et réseaux.**
-- [ ] **Step 6: Ajouter rotation par glissement, zoom molette/boutons/pincement, isolement et annotations progressives.**
-- [ ] **Step 7: Exécuter les tests puis commit `feat: build layered anatomy explorer`.**
+- [x] **Step 1: Tester qu’un clic sur un hotspot sélectionne la structure correspondante.**
+- [x] **Step 2: Tester que les contrôles zoom, rotation, niveau et réinitialisation changent la scène.**
+- [x] **Step 3: Exécuter le test et confirmer l’échec.**
+- [x] **Step 4: Créer la silhouette globale avec zones d’organes et vues antérieure/postérieure.**
+- [x] **Step 5: Créer les onze illustrations SVG en couches avec variantes externe, coupe et réseaux.**
+- [x] **Step 6: Ajouter rotation par glissement, zoom molette/boutons/pincement, isolement et annotations progressives.**
+- [x] **Step 7: Exécuter les tests puis commit `feat: build layered anatomy explorer`.**
 
 ### Task 5: Navigation anatomique, fiches et recherche
 
@@ -128,14 +128,14 @@ expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 - Consumes: données anatomiques, état et callbacks de sélection.
 - Produces: navigation hiérarchique, fiche à onglets, recherche globale et navigation précédent/suivant.
 
-- [ ] **Step 1: Tester une recherche `ventriculus` ouvrant le ventricule gauche.**
-- [ ] **Step 2: Tester que précédent/suivant parcourt les structures du même organe.**
-- [ ] **Step 3: Exécuter les tests et confirmer l’échec.**
-- [ ] **Step 4: Implémenter l’arbre repliable avec compteurs de structures.**
-- [ ] **Step 5: Implémenter la fiche avec onglets Rôle, Anatomie et Clinique.**
-- [ ] **Step 6: Implémenter la recherche clavier avec résultats français/latin.**
-- [ ] **Step 7: Intégrer les composants dans `App` et exécuter les tests.**
-- [ ] **Step 8: Commit `feat: add anatomy navigation and knowledge panels`.**
+- [x] **Step 1: Tester une recherche `ventriculus` ouvrant le ventricule gauche.**
+- [x] **Step 2: Tester que précédent/suivant parcourt les structures du même organe.**
+- [x] **Step 3: Exécuter les tests et confirmer l’échec.**
+- [x] **Step 4: Implémenter l’arbre repliable avec compteurs de structures.**
+- [x] **Step 5: Implémenter la fiche avec onglets Rôle, Anatomie et Clinique.**
+- [x] **Step 6: Implémenter la recherche clavier avec résultats français/latin.**
+- [x] **Step 7: Intégrer les composants dans `App` et exécuter les tests.**
+- [x] **Step 8: Commit `feat: add anatomy navigation and knowledge panels`.**
 
 ### Task 6: Direction artistique, responsive et accessibilité
 
@@ -146,11 +146,11 @@ expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 **Interfaces:**
 - Produces: design sombre validé, panneaux adaptatifs et expérience clavier complète.
 
-- [ ] **Step 1: Définir les jetons exacts de couleur, typographie, espacement, profondeur et mouvement issus de la maquette.**
-- [ ] **Step 2: Implémenter l’entrée orchestrée, les transitions de sélection et `prefers-reduced-motion`.**
-- [ ] **Step 3: Transformer la navigation en tiroir et la fiche en panneau inférieur sous 900 px.**
-- [ ] **Step 4: Vérifier ordre de tabulation, focus visible, libellés et contrastes.**
-- [ ] **Step 5: Exécuter `pnpm test:run` et `pnpm build`, puis commit `feat: polish responsive accessible interface`.**
+- [x] **Step 1: Définir les jetons exacts de couleur, typographie, espacement, profondeur et mouvement issus de la maquette.**
+- [x] **Step 2: Implémenter l’entrée orchestrée, les transitions de sélection et `prefers-reduced-motion`.**
+- [x] **Step 3: Transformer la navigation en tiroir et la fiche en panneau inférieur sous 900 px.**
+- [x] **Step 4: Vérifier ordre de tabulation, focus visible, libellés et contrastes.**
+- [x] **Step 5: Exécuter `pnpm test:run` et `pnpm build`, puis commit `feat: polish responsive accessible interface`.**
 
 ### Task 7: Vérification navigateur et livraison
 
@@ -161,11 +161,11 @@ expect(findOrgan('heart')?.structures.length).toBeGreaterThanOrEqual(18)
 **Interfaces:**
 - Produces: preuve du parcours principal et instructions de lancement.
 
-- [ ] **Step 1: Écrire un parcours ouvrant le cœur, choisissant le mode coupe, sélectionnant la valve mitrale, zoomant puis réinitialisant.**
-- [ ] **Step 2: Vérifier la restauration par URL et la recherche d’un organe.**
-- [ ] **Step 3: Lancer le parcours aux formats 1440 × 900, 1024 × 768 et 390 × 844.**
-- [ ] **Step 4: Capturer les vues finales et comparer palette, hiérarchie, densité, texte, contrôles, responsive et traitement anatomique aux maquettes validées.**
-- [ ] **Step 5: Corriger toute dérive visible ou interaction inerte, puis relancer tests et build.**
-- [ ] **Step 6: Documenter `pnpm install`, `pnpm dev`, `pnpm test:run` et `pnpm build`.**
-- [ ] **Step 7: Commit `test: verify Anatomia core exploration flow`.**
+- [x] **Step 1: Écrire un parcours ouvrant le cœur, choisissant le mode coupe, sélectionnant la valve mitrale, zoomant puis réinitialisant.**
+- [x] **Step 2: Vérifier la restauration par URL et la recherche d’un organe.**
+- [x] **Step 3: Lancer le parcours aux formats 1440 × 900, 1024 × 768 et 390 × 844.**
+- [x] **Step 4: Capturer les vues finales et comparer palette, hiérarchie, densité, texte, contrôles, responsive et traitement anatomique aux maquettes validées.**
+- [x] **Step 5: Corriger toute dérive visible ou interaction inerte, puis relancer tests et build.**
+- [x] **Step 6: Documenter `pnpm install`, `pnpm dev`, `pnpm test:run` et `pnpm build`.**
+- [x] **Step 7: Commit `test: verify Anatomia core exploration flow`.**
 
