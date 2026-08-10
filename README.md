@@ -23,8 +23,10 @@ Le projet couvre actuellement :
 - Vue globale antérieure et postérieure du corps humain
 - Navigation par système, organe et sous-structure
 - Modes `Externe`, `Coupe`, `Réseaux` et `Isoler`
+- Matière anatomique en couches : relief tissulaire, profondeur de coupe et réseaux renforcés
 - Zoom, rotation simulée et réinitialisation de la caméra
 - Repères anatomiques interactifs
+- Repère actif toujours visible, avec liaison et accentuation dédiées
 - Recherche en français ou en latin avec `⌘/Ctrl + K`
 - Fiches détaillées avec trois niveaux de lecture
 - URL partageable restaurant l’organe, la structure et le mode sélectionnés
@@ -87,4 +89,3 @@ src/
 ## Version prête à héberger
 
 La commande `pnpm build` produit un site statique dans `dist/`. Une archive prête à héberger est également fournie dans [`outputs/anatomia-site.zip`](outputs/anatomia-site.zip).
-

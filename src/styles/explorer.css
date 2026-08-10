@@ -4,11 +4,35 @@
 .organ-stage:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;background:radial-gradient(ellipse at 50% 52%,transparent 0 42%,#d9e5b80a 68%,transparent 78%)}
 .organ-illustration{transform-origin:50% 50%;isolation:isolate}
 .organ-illustration path{vector-effect:non-scaling-stroke}
+.tissue-shell,.cutaway-layer,.network-layer{transform-origin:50% 50%;transition:opacity .42s var(--ease),filter .42s var(--ease),transform .55s var(--ease)}
+.tissue-depth{mix-blend-mode:multiply;opacity:.74}
+.tissue-highlight{mix-blend-mode:screen;opacity:.76;filter:blur(.35px)}
+.cutaway-layer{filter:drop-shadow(0 12px 16px #130a10aa);animation:cutaway-reveal .55s var(--ease) both}
+.cut-rim{opacity:.88;filter:drop-shadow(0 0 5px #ffc9b066)}
 .organ-details{mix-blend-mode:screen;transition:opacity .35s var(--ease)}
 .organ-details--kidneys,.organ-details--bladder,.organ-details--lungs{mix-blend-mode:normal}
 .generic-network{mix-blend-mode:screen}
-.organ-visual.mode-networks .organ-illustration>path:first-child{filter:saturate(.74) brightness(.78)}
+.organ-visual.mode-external .tissue-shell{filter:saturate(1.08) contrast(1.04)}
+.organ-visual.mode-section .tissue-shell{filter:saturate(.82) brightness(.74);transform:translate(-7px,-4px) scale(.985)}
+.organ-visual.mode-networks .tissue-shell{filter:saturate(.6) brightness(.62) contrast(1.12)}
+.organ-visual.mode-networks .network-layer{filter:drop-shadow(0 0 7px #d8e94c44);animation:network-reveal .55s var(--ease) both}
+.organ-visual.mode-isolate .tissue-shell{filter:saturate(.46) brightness(.55)}
+.organ-visual.mode-isolate .cutaway-layer{opacity:.42}
 .organ-visual.mode-section .organ-details{mix-blend-mode:normal}
 .organ-visual.mode-isolate .organ-details{opacity:.16}
+.organ-visual.mode-isolate .cut-rim{opacity:.62}
 .organ-visual.mode-isolate .svg-hotspot.selected circle{filter:drop-shadow(0 0 12px var(--accent));stroke-width:4}
 .svg-hotspot circle{transition:filter .2s var(--ease),stroke-width .2s var(--ease)}
+@keyframes cutaway-reveal{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes network-reveal{from{opacity:0;stroke-dasharray:12 12}to{opacity:1;stroke-dasharray:1000 0}}
+.explorer[data-mode="section"] .organ-aura{background:radial-gradient(circle,#6c3f3840 0,#15362d38 36%,transparent 67%)}
+.explorer[data-mode="networks"] .organ-aura{background:radial-gradient(circle,#24575052 0,#0b312933 38%,transparent 68%)}
+.explorer[data-mode="isolate"] .organ-aura{background:radial-gradient(circle,#d8e94c1f 0,#123a3030 36%,transparent 66%)}
+.anatomy-label__leader{position:absolute;top:50%;width:100px;height:1px;background:linear-gradient(90deg,#648078,#91aba2);opacity:.7;transform-origin:center;transition:width .25s var(--ease),background .25s var(--ease),opacity .25s var(--ease)}
+.anatomy-label--left .anatomy-label__leader{left:calc(100% + 10px)}
+.anatomy-label--right .anatomy-label__leader{right:calc(100% + 10px);background:linear-gradient(90deg,#91aba2,#648078)}
+.anatomy-label__leader:after{content:"";position:absolute;top:-3px;width:7px;height:7px;border-radius:50%;background:#728b82;box-shadow:0 0 0 3px #071815}
+.anatomy-label--left .anatomy-label__leader:after{right:0}
+.anatomy-label--right .anatomy-label__leader:after{left:0}
+.anatomy-label.selected .anatomy-label__leader{width:112px;background:var(--accent);opacity:1}
+.anatomy-label.selected .anatomy-label__leader:after{background:var(--accent);box-shadow:0 0 0 5px #d8e94c1a,0 0 14px #d8e94c66}
