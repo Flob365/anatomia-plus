@@ -42,3 +42,21 @@ test.each(allOrgans)('affiche le réseau anatomique de $name', (organ) => {
 
   expect(container.querySelector('.network-layer')).toBeInTheDocument()
 })
+
+test.each(allOrgans)('sépare la surface réaliste et la coupe de $name', organ => {
+  const { container, rerender } = render(<OrganVisual organ={organ} mode="external" selectedId={null} onSelect={() => undefined}/> )
+  expect(container.querySelector('.realistic-organ')).toBeInTheDocument()
+  expect(container.querySelector('.cutaway-layer')).not.toBeInTheDocument()
+  const externalImage = container.querySelector('image')?.getAttribute('href')
+  rerender(<OrganVisual organ={organ} mode="section" selectedId={null} onSelect={() => undefined}/> )
+  if (organ.id === 'heart') expect(container.querySelector('image')?.getAttribute('href')).not.toBe(externalImage)
+  else expect(container.querySelector('[aria-label="Plan de coupe"]')).toBeInTheDocument()
+})
+
+test('deux vues du même organe ne partagent pas les identifiants de leurs filtres et masques', () => {
+  const { container } = render(<><OrganVisual organ={kidneys} mode="section" selectedId={null} onSelect={() => undefined}/><OrganVisual organ={kidneys} mode="isolate" selectedId="cortex" onSelect={() => undefined}/></>)
+  const ids = [...container.querySelectorAll('[id]')].map(element => element.id)
+  expect(new Set(ids).size).toBe(ids.length)
+  const use = container.querySelector('use')!
+  expect(container.querySelector(use.getAttribute('href')!)).toBeInTheDocument()
+})

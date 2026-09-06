@@ -4,11 +4,16 @@ test('parcours cœur, coupe, valve, zoom et isolement', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('button', { name: 'Explorer Cœur' }).click()
   await expect(page.getByRole('img', { name: 'Cœur, vue section' })).toBeVisible()
+  if (await page.getByRole('button', { name: 'Ouvrir le menu' }).isVisible()) {
+    await page.getByRole('button', { name: 'Ouvrir le menu' }).click()
+  }
   await page.getByRole('button', { name: '10 Valve mitrale' }).click()
   await expect(page.getByRole('heading', { name: 'Valve mitrale' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Valve mitrale, repère anatomique' })).toBeVisible()
+  if (page.viewportSize()!.width < 900) await page.getByRole('button', { name: 'Fermer la fiche' }).click()
   await page.getByRole('button', { name: 'Augmenter le zoom' }).click()
   await expect(page.locator('output')).toHaveText('110%')
+  if (page.viewportSize()!.width < 900) await page.getByRole('button', { name: 'Voir la fiche' }).click()
   await page.getByRole('button', { name: 'Isoler cette structure' }).click()
   await expect(page.getByRole('img', { name: 'Cœur, vue isolate' })).toBeVisible()
   await expect(page).toHaveURL(/organ=heart.*mode=isolate.*structure=mitral-valve/)
