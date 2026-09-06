@@ -38,10 +38,10 @@ export function App() {
       <button className="mobile-menu" onClick={() => setNavOpen(true)} aria-label="Ouvrir le menu"><Icon name="menu"/></button>
       <button className="top-brand" onClick={explorer.closeOrgan}>ANATOMIA<b>+</b></button>
       <div className="breadcrumb">{organ ? <><span>{organ.systemId === 'cardiovascular' ? 'Cardiovasculaire' : organ.systemId === 'respiratory' ? 'Respiratoire' : organ.systemId === 'digestive' ? 'Digestif' : organ.systemId === 'nervous' ? 'Nerveux' : 'Urinaire'}</span><i>/</i><span>{organ.name}</span>{structure && <><i>/</i><strong>{structure.name}</strong></>}</> : <span>Atlas du corps humain</span>}</div>
-      <button className="search-trigger" onClick={() => setSearchOpen(true)}><Icon name="search"/><span>Rechercher une structure…</span><kbd>⌘ K</kbd></button>
+      <button className="search-trigger" aria-label="Rechercher une structure" onClick={() => setSearchOpen(true)}><Icon name="search"/><span>Rechercher une structure…</span><kbd>⌘ K</kbd></button>
       <button className="top-icon" aria-label="À propos" onClick={() => setInfoOpen(true)}><Icon name="help"/></button>
     </header>
-    <AnatomyTree organ={organ} structureId={state.structureId} onOrgan={explorer.selectOrgan} onStructure={(id) => { explorer.selectStructure(id); setPanelOpen(true) }} onClose={() => setNavOpen(false)}/>
+    <AnatomyTree organ={organ} structureId={state.structureId} onOrgan={explorer.selectOrgan} onStructure={(id) => { explorer.selectStructure(id); setPanelOpen(true); setNavOpen(false) }} onClose={() => setNavOpen(false)}/>
     {organ ? <OrganExplorer organ={organ} structureId={state.structureId} mode={state.mode} rotation={state.rotation} zoom={state.zoom} onStructure={(id) => { explorer.selectStructure(id); setPanelOpen(true) }} onMode={explorer.setMode} onRotate={explorer.rotateBy} onZoom={explorer.zoomBy} onReset={explorer.resetView}/> : <BodyOverview organs={allOrgans} onSelect={explorer.selectOrgan}/>} 
     {organ && structure && panelOpen && <StructurePanel organ={organ} structure={structure} onSelect={explorer.selectStructure} onIsolate={() => explorer.setMode('isolate')} onClose={() => setPanelOpen(false)}/>} 
     {organ && !panelOpen && <button className="panel-reopen" onClick={() => setPanelOpen(true)}><Icon name="info"/>Voir la fiche</button>}

@@ -40,7 +40,7 @@ export function OrganExplorer({ organ, structureId, mode, rotation, zoom, onStru
         <OrganVisual organ={organ} mode={mode} selectedId={structureId} onSelect={onStructure}/>
       </div>
       {displayedStructures.map((structure, index) => <button key={structure.id} aria-label={`${structure.name}, repère anatomique`} aria-current={structure.id === selected.id ? 'true' : undefined} className={`anatomy-label anatomy-label--${index % 2 ? 'right' : 'left'} ${structure.id === selected.id ? 'selected' : ''}`} style={{ top: `${18 + index * 10}%` }} onClick={() => onStructure(structure.id)}><span>{structure.name}</span><span className="anatomy-label__leader" aria-hidden="true"/></button>)}
-      <div className="stage-caption"><strong>{organ.name}</strong><span>{organ.latin} · {organ.location}</span></div>
+      <div className="stage-caption"><span className="render-caption">{mode === 'external' ? 'Illustration texturée' : mode === 'networks' ? 'Réseaux · schéma anatomique' : mode === 'isolate' ? 'Détail sélectionné' : organ.id === 'heart' ? 'Coupe anatomique illustrée' : 'Coupe · schéma anatomique'}</span><strong>{organ.name}</strong><span>{organ.latin} · {organ.location}</span></div>
     </div>
     <div className="camera-controls" aria-label="Contrôles de la vue">
       <button onClick={onReset}><Icon name="reset"/>Réinitialiser</button>

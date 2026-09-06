@@ -23,7 +23,9 @@ Le projet couvre actuellement :
 - Vue globale antérieure et postérieure du corps humain
 - Navigation par système, organe et sous-structure
 - Modes `Externe`, `Coupe`, `Réseaux` et `Isoler`
-- Matière anatomique en couches : relief tissulaire, profondeur de coupe et réseaux renforcés
+- 11 illustrations externes texturées : vaisseaux, reliefs, lobules, circonvolutions et fibres visibles
+- Coupes explicatives propres à chaque organe et réseaux ramifiés
+- Isolement visuel de la région sélectionnée, avec conservation du contexte
 - Zoom, rotation simulée et réinitialisation de la caméra
 - Repères anatomiques interactifs
 - Repère actif toujours visible, avec liaison et accentuation dédiées
@@ -89,3 +91,11 @@ src/
 ## Version prête à héberger
 
 La commande `pnpm build` produit un site statique dans `dist/`. Une archive prête à héberger est également fournie dans [`outputs/anatomia-site.zip`](outputs/anatomia-site.zip).
+
+## Illustrations détaillées
+
+![Les onze organes en vue externe](outputs/organes-apercu.png)
+
+La vue externe utilise un atlas d’illustrations texturées partagé entre les onze organes. Le cœur en coupe conserve son illustration dédiée. Les autres coupes et les réseaux sont des schémas SVG, avec des détails spécifiques aux tissus : replis gastriques, pyramides rénales, arborisation bronchique et lobules pancréatiques. Les repères sont positionnés séparément selon la représentation. Sur mobile, la fiche reste sous la zone de visualisation.
+
+L’atlas `src/assets/organ-atlas.png` a été généré par IA pour ce projet le 6 septembre 2026. Il s’agit d’illustrations pédagogiques, pas de reconstructions issues d’imagerie médicale ni de modèles anatomiques validés. Les repères internes en vue externe indiquent une région projetée. Le cadrage de chaque spécimen est défini dans `atlasLayout.ts`, sans recopier l’image pour chaque organe. L’atlas mesure 1086 × 1448 pixels ; ses détails matriciels ont une résolution finie au fort zoom. Les schémas restent vectoriels. La rotation reste une simulation sur une représentation 2D.
